@@ -140,7 +140,7 @@ export default function App() {
   const selectedGroup = groups.find((g) => g.id === selectedGroupId);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-cream">
+    <div className="flex h-screen overflow-hidden bg-cream w-full">
       <Sidebar
         habits={habits}
         groups={groups}

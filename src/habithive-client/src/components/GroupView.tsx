@@ -235,7 +235,8 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
       ) : (
         <div className="flex-1 flex flex-col min-h-0">
           {/* Messages */}
-          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2 xl:px-8 2xl:px-16">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4">
+            <div className="max-w-4xl mx-auto space-y-2">
             {hasMore && (
               <button onClick={loadMoreMessages} className="w-full py-2 text-sm text-cocoa hover:text-charcoal">
                 Load more messages...
@@ -255,7 +256,8 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
                 onRespondToSuggestion={respondToSuggestion}
               />
             ))}
-            <div ref={messagesEndRef} />
+              <div ref={messagesEndRef} />
+            </div>
           </div>
 
           {/* GIF Picker */}
@@ -299,36 +301,38 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
           )}
 
           {/* Chat Input */}
-          <div className="p-3 bg-white border-t border-border-warm flex items-center gap-2 xl:px-8 2xl:px-16">
-            <button
-              onClick={() => { setShowGifPicker(!showGifPicker); setShowSpecialPicker(false); }}
-              className={`p-2 rounded-xl transition-all ${showGifPicker ? 'bg-amber text-white' : 'text-cocoa hover:bg-stone'}`}
-              title="GIFs"
-            >
-              🎬
-            </button>
-            <button
-              onClick={() => { setShowSpecialPicker(!showSpecialPicker); setShowGifPicker(false); }}
-              className={`p-2 rounded-xl transition-all ${showSpecialPicker ? 'bg-amber text-white' : 'text-cocoa hover:bg-stone'}`}
-              title="Special message"
-            >
-              ⭐
-            </button>
-            <input
-              type="text"
-              value={messageText}
-              onChange={(e) => setMessageText(e.target.value)}
-              onKeyDown={(e) => e.key === 'Enter' && handleSendText()}
-              placeholder="Type a message..."
-              className="flex-1 px-4 py-2.5 rounded-full border border-border-warm bg-cream text-sm focus:outline-none focus:ring-2 focus:ring-amber"
-            />
-            <button
-              onClick={handleSendText}
-              disabled={!messageText.trim()}
-              className="w-10 h-10 rounded-full bg-amber text-white flex items-center justify-center hover:bg-amber-dark transition-all disabled:opacity-30"
-            >
-              ↑
-            </button>
+          <div className="bg-white border-t border-border-warm px-4 py-3">
+            <div className="max-w-4xl mx-auto flex items-center gap-2">
+              <button
+                onClick={() => { setShowGifPicker(!showGifPicker); setShowSpecialPicker(false); }}
+                className={`p-2 rounded-xl transition-all ${showGifPicker ? 'bg-amber text-white' : 'text-cocoa hover:bg-stone'}`}
+                title="GIFs"
+              >
+                🎬
+              </button>
+              <button
+                onClick={() => { setShowSpecialPicker(!showSpecialPicker); setShowGifPicker(false); }}
+                className={`p-2 rounded-xl transition-all ${showSpecialPicker ? 'bg-amber text-white' : 'text-cocoa hover:bg-stone'}`}
+                title="Special message"
+              >
+                ⭐
+              </button>
+              <input
+                type="text"
+                value={messageText}
+                onChange={(e) => setMessageText(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleSendText()}
+                placeholder="Type a message..."
+                className="flex-1 px-4 py-2.5 rounded-full border border-border-warm bg-cream text-sm focus:outline-none focus:ring-2 focus:ring-amber"
+              />
+              <button
+                onClick={handleSendText}
+                disabled={!messageText.trim()}
+                className="w-10 h-10 rounded-full bg-amber text-white flex items-center justify-center hover:bg-amber-dark transition-all disabled:opacity-30"
+              >
+                ↑
+              </button>
+            </div>
           </div>
         </div>
       )}
