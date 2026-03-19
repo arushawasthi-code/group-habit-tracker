@@ -6,6 +6,22 @@ reality before trusting it. -->
 
 # HabitHive — Agent Reference
 
+## Version Control
+
+Repository: `git@github.com:arushawasthi-code/group-habit-tracker.git`
+
+```bash
+git status / git log --oneline   # standard workflow
+git checkout -b fix/<topic>      # branch naming convention
+git push -u origin <branch>      # push without creating a PR yet
+```
+
+**Branch convention:** `fix/<topic>` for bug/polish branches, `feat/<topic>` for new features. `master` is the stable baseline — never commit directly to it for anything non-trivial.
+
+**`.gitignore` covers:** `bin/`, `obj/`, `*.db`, `node_modules/`, `dist/`, `test-results/`, `playwright-report/`.
+
+---
+
 ## Commands
 
 ```bash

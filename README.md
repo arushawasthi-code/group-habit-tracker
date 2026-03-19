@@ -59,6 +59,22 @@ If no key is configured, the GIF button is hidden — everything else works fine
 - **Special Messages** — Send "Lock In" 🔒, "You Can Do This" 💪, or "Stop Being Lazy" 😤 to encourage friends
 - **Habit Suggestions** — Suggest splitting, combining, or rewording a friend's habit
 
+## Development
+
+The repository is hosted on GitHub at `arushawasthi-code/group-habit-tracker`.
+
+```bash
+git clone git@github.com:arushawasthi-code/group-habit-tracker.git
+cd group-habit-tracker
+```
+
+Work is done on feature/fix branches and merged into `master` via pull request. Branch naming: `fix/<topic>` for bugs, `feat/<topic>` for new features.
+
+```bash
+git checkout -b fix/my-topic     # create a branch
+git push -u origin fix/my-topic  # push for review
+```
+
 ## Notes
 
 - Days reset at midnight UTC
