@@ -140,7 +140,7 @@ export default function App() {
   const selectedGroup = groups.find((g) => g.id === selectedGroupId);
 
   return (
-    <div className="flex min-h-screen bg-cream">
+    <div className="flex h-screen overflow-hidden bg-cream">
       <Sidebar
         habits={habits}
         groups={groups}
@@ -154,15 +154,17 @@ export default function App() {
       />
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col">
+      <div className="flex-1 flex flex-col min-h-0">
         {selectedGroup ? (
           <GroupView group={selectedGroup} onUpdate={loadData} />
         ) : selectedHabit ? (
-          <HabitDetail
-            habit={selectedHabit}
-            groups={groups}
-            onUpdate={loadData}
-          />
+          <div className="flex-1 overflow-y-auto">
+            <HabitDetail
+              habit={selectedHabit}
+              groups={groups}
+              onUpdate={loadData}
+            />
+          </div>
         ) : (
           <div className="flex-1 flex items-center justify-center">
             <div className="text-center animate-fade-in">

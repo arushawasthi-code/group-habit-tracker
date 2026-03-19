@@ -235,7 +235,7 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
       ) : (
         <div className="flex-1 flex flex-col min-h-0">
           {/* Messages */}
-          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2">
+          <div ref={chatContainerRef} className="flex-1 overflow-y-auto p-4 space-y-2 xl:px-8 2xl:px-16">
             {hasMore && (
               <button onClick={loadMoreMessages} className="w-full py-2 text-sm text-cocoa hover:text-charcoal">
                 Load more messages...
@@ -299,7 +299,7 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
           )}
 
           {/* Chat Input */}
-          <div className="p-3 bg-white border-t border-border-warm flex items-center gap-2">
+          <div className="p-3 bg-white border-t border-border-warm flex items-center gap-2 xl:px-8 2xl:px-16">
             <button
               onClick={() => { setShowGifPicker(!showGifPicker); setShowSpecialPicker(false); }}
               className={`p-2 rounded-xl transition-all ${showGifPicker ? 'bg-amber text-white' : 'text-cocoa hover:bg-stone'}`}

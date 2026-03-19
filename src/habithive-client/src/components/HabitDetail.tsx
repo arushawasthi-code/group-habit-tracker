@@ -80,7 +80,7 @@ export default function HabitDetail({ habit, groups, onUpdate, onShareCompletion
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 animate-fade-in">
+    <div className="max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto p-6 animate-fade-in">
       <div className="bg-white rounded-2xl shadow-sm border border-border-warm p-6">
         {/* Header */}
         {editing ? (
