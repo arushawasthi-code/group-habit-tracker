@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet new:*)",
+      "Bash(mkdir -p src)",
+      "Bash(dotnet sln:*)",
+      "Bash(dotnet add:*)",
+      "Bash(cd:*)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)",
+      "Bash(dotnet build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(timeout 10 dotnet run --launch-profile http)",
+      "Bash(npm init:*)",
+      "Bash(npx playwright:*)",
+      "mcp__lattice__lattice_load",
+      "mcp__lattice__lattice_query",
+      "mcp__lattice__lattice_close",
+      "Bash(find 'C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/HabitHive.Api' -name *.cs)",
+      "Bash(find 'C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/playwright-report' -name *.json)",
+      "Bash(for dir:*)",
+      "Bash(do 'base=C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/test-results/$dir' echo '=== $dir ===' cat $base/error-context.md)",
+      "Bash(find 'C:\\\\Users\\\\Arush Awasthi\\\\Documents\\\\group-habit-tracking' -name *.html -o -name *report* -type f)",
+      "Bash(grep:*)",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Leave'' }\\)/getByRole\\(''button'', { name: ''Leave'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/groups.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Stay'' }\\)/getByRole\\(''button'', { name: ''Stay'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/groups.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Create Group'' }\\)/getByRole\\(''button'', { name: ''Create Group'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/habits.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Create Group'' }\\)/getByRole\\(''button'', { name: ''Create Group'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/visibility.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Create Group'' }\\)/getByRole\\(''button'', { name: ''Create Group'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/navigation.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Create Group'' }\\)/getByRole\\(''button'', { name: ''Create Group'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/workflows.spec.ts\")",
+      "Bash(sed -i \"s/getByRole\\(''button'', { name: ''Create Group'' }\\)/getByRole\\(''button'', { name: ''Create Group'', exact: true }\\)/g\" \"C:/Users/Arush Awasthi/Documents/group-habit-tracking/src/habithive-client/e2e/edge-cases.spec.ts\")"
+    ]
+  },
+  "enabledMcpjsonServers": [
+    "playwright-test"
+  ]
+}

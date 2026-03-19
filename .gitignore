@@ -1,0 +1,29 @@
+# .NET
+bin/
+obj/
+*.db
+*.db-shm
+*.db-wal
+wwwroot/uploads/
+
+# Node
+node_modules/
+dist/
+
+# Playwright
+test-results/
+playwright-report/
+
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+*.local
