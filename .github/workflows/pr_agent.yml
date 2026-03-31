@@ -13,6 +13,14 @@ jobs:
       pull-requests: write
       contents: read
     steps:
+      - name: Debug key presence
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_KEY }}" ]; then
+            echo "ANTHROPIC_KEY is not set!"
+            exit 1
+          else
+            echo "ANTHROPIC_KEY is set."
+          fi
       - name: PR Agent action step
         uses: qodo-ai/pr-agent@main
         env:
