@@ -141,6 +141,7 @@ export default function App() {
 
   return (
     <div className="flex h-screen overflow-hidden bg-cream w-full">
+
       <Sidebar
         habits={habits}
         groups={groups}
