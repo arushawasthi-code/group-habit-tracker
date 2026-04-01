@@ -302,10 +302,10 @@ namespace HabitHive.Api.Migrations
                 name: "ChatMessages");
 
             migrationBuilder.DropTable(
-                name: "Groups");
+                name: "Habits");
 
             migrationBuilder.DropTable(
-                name: "Habits");
+                name: "Groups");   
 
             migrationBuilder.DropTable(
                 name: "Users");
