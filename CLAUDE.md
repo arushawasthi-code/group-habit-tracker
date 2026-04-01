@@ -105,7 +105,7 @@ private Guid GetUserId() => Guid.Parse(Context.User!.FindFirstValue(ClaimTypes.N
 
 **Group soft-delete:** `GroupMember.LeftAt` nullable DateTime. Active members = `LeftAt == null`. Filter pattern: `.Where(gm => gm.LeftAt == null)`.
 
-**DB schema:** No EF migrations — `db.Database.EnsureCreated()` in `Program.cs`. Schema changes require deleting `habithive.db`.
+**DB schema:** EF Core migrations in `src/HabitHive.Api/Migrations/`. `db.Database.Migrate()` in `Program.cs` applies pending migrations on startup. Add new migrations with `dotnet ef migrations add <Name>` from `src/HabitHive.Api/`.
 
 **Streak calculation:** Lives in `HabitService.CalculateStreak()`. Uses UTC dates (`DateOnly`). Daily = consecutive calendar days; Weekly = one completion per Mon–Sun week; Custom = must complete on each specified `DayOfWeek`.
 
