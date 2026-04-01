@@ -1,6 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using HabitHive.Api.Hubs;
+using HabitHive.Api.Models;
 using HabitHive.Api.Models.Dtos;
 using HabitHive.Api.Services;
 
@@ -12,10 +15,17 @@ namespace HabitHive.Api.Controllers;
 public class HabitsController : ControllerBase
 {
     private readonly HabitService _habitService;
+    private readonly ChatService _chatService;
+    private readonly IHubContext<ChatHub> _hubContext;
+    private readonly ILogger<HabitsController> _logger;
 
-    public HabitsController(HabitService habitService)
+    public HabitsController(HabitService habitService, ChatService chatService,
+        IHubContext<ChatHub> hubContext, ILogger<HabitsController> logger)
     {
         _habitService = habitService;
+        _chatService = chatService;
+        _hubContext = hubContext;
+        _logger = logger;
     }
 
     private Guid GetUserId() => Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
@@ -78,7 +88,37 @@ public class HabitsController : ControllerBase
     {
         try
         {
-            var result = await _habitService.CompleteHabitAsync(GetUserId(), id, request);
+            var userId = GetUserId();
+            var result = await _habitService.CompleteHabitAsync(userId, id, request);
+
+            // Auto-post completion message to all groups this habit is shared with
+            var groupIds = await _habitService.GetSharedGroupIdsAsync(id);
+            if (groupIds.Count > 0)
+            {
+                var content = System.Text.Json.JsonSerializer.Serialize(new
+                {
+                    streak = result.CurrentStreak,
+                    photoUrl = request.PhotoUrl,
+                    note = request.Note
+                });
+                var msgRequest = new SendMessageRequest(MessageType.HabitCompletion, content, id);
+
+                foreach (var groupId in groupIds)
+                {
+                    try
+                    {
+                        var msg = await _chatService.SaveMessageAsync(groupId, userId, msgRequest);
+                        await _hubContext.Clients.Group(groupId.ToString()).SendAsync("ReceiveMessage", msg);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex,
+                            "Failed to post completion message to group {GroupId} for habit {HabitId}",
+                            groupId, id);
+                    }
+                }
+            }
+
             return Ok(result);
         }
         catch (KeyNotFoundException)
