@@ -1,0 +1,35 @@
+name: PR Agent (Claude)
+on:
+  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+  issue_comment:
+    types: [created]
+jobs:
+  pr_agent_job:
+    if: ${{ github.event.sender.type != 'Bot' }}
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+      contents: read
+    steps:
+      - name: Debug key presence
+        run: |
+          if [ -z "${{ secrets.ANTHROPIC_KEY }}" ]; then
+            echo "ANTHROPIC_KEY is not set!"
+            exit 1
+          else
+            echo "ANTHROPIC_KEY is set."
+          fi
+      - name: PR Agent action step
+        uses: qodo-ai/pr-agent@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENAI_KEY: "dummy"
+          config.model: "anthropic/claude-sonnet-4-6"
+          config.fallback_models: '["anthropic/claude-haiku-4-5"]'
+          ANTHROPIC.KEY: ${{ secrets.ANTHROPIC_KEY }}
+          github_action_config.auto_review: "true"
+          github_action_config.auto_describe: "true"
+          github_action_config.auto_improve: "true"

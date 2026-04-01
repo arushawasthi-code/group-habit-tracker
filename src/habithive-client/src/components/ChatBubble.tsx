@@ -50,7 +50,7 @@ export default function ChatBubble({ message, isOwn, isTargetUser, onRespondToSu
     try { parsed = JSON.parse(message.content); } catch {}
     return (
       <div className="animate-slide-up">
-        <div className="bg-sage-light border border-sage/20 rounded-xl p-4 max-w-md mx-auto">
+        <div className="bg-sage-light border border-sage/20 rounded-xl p-4 max-w-xl lg:max-w-2xl mx-auto">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg animate-pop">✅</span>
             <span className="font-semibold text-charcoal text-sm">{message.senderDisplayName}</span>
@@ -82,7 +82,7 @@ export default function ChatBubble({ message, isOwn, isTargetUser, onRespondToSu
 
     return (
       <div className="animate-slide-up">
-        <div className={`${config.bgColor} border-l-4 ${config.borderColor} rounded-xl p-4 max-w-md mx-auto`}>
+        <div className={`${config.bgColor} border-l-4 ${config.borderColor} rounded-xl p-4 max-w-xl lg:max-w-2xl mx-auto`}>
           <div className="flex items-center gap-2 mb-1">
             <span className="text-xl">{config.icon}</span>
             <span className="font-bold font-display text-charcoal">{config.title}</span>
@@ -109,7 +109,7 @@ export default function ChatBubble({ message, isOwn, isTargetUser, onRespondToSu
 
     return (
       <div className="animate-slide-up">
-        <div className="bg-purple-light border-l-4 border-l-purple rounded-xl p-4 max-w-md mx-auto">
+        <div className="bg-purple-light border-l-4 border-l-purple rounded-xl p-4 max-w-xl lg:max-w-2xl mx-auto">
           <div className="flex items-center gap-2 mb-2">
             <span className="text-lg">💡</span>
             <span className="font-semibold text-charcoal text-sm">
