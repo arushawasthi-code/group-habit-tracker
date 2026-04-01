@@ -22,7 +22,7 @@ export default function Sidebar({
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div className={`${collapsed ? 'w-16' : 'w-64'} min-h-screen bg-cream border-r border-border-warm flex flex-col transition-all duration-300`}>
+    <div className={`${collapsed ? 'w-16' : 'w-64 xl:w-72'} h-full bg-cream border-r border-border-warm flex flex-col transition-all duration-300`}>
       {/* Logo */}
       <div className="p-4 flex items-center justify-between">
         {!collapsed && (
