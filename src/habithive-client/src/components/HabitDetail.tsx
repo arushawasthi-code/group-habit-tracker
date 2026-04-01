@@ -8,7 +8,6 @@ interface HabitDetailProps {
   habit: Habit;
   groups: Group[];
   onUpdate: () => void;
-  onShareCompletion?: (habitId: string, groupId: string) => void;
 }
 
 const frequencyLabels: Record<number, string> = {
@@ -17,12 +16,11 @@ const frequencyLabels: Record<number, string> = {
   [HabitFrequency.Custom]: 'Custom',
 };
 
-export default function HabitDetail({ habit, groups, onUpdate, onShareCompletion }: HabitDetailProps) {
+export default function HabitDetail({ habit, groups, onUpdate }: HabitDetailProps) {
   const [completing, setCompleting] = useState(false);
   const [editing, setEditing] = useState(false);
   const [editName, setEditName] = useState(habit.name);
   const [editDesc, setEditDesc] = useState(habit.description || '');
-  const [showSharePrompt, setShowSharePrompt] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
   const handleComplete = async () => {
@@ -50,8 +48,6 @@ export default function HabitDetail({ habit, groups, onUpdate, onShareCompletion
       }
 
       onUpdate();
-      setShowSharePrompt(true);
-      setTimeout(() => setShowSharePrompt(false), 8000);
     } catch {
       // Already completed or error
     } finally {
@@ -165,27 +161,6 @@ export default function HabitDetail({ habit, groups, onUpdate, onShareCompletion
             ? 'Done for today! 🎉'
             : 'Mark Complete ✓'}
         </button>
-
-        {/* Share Completion Prompt */}
-        {showSharePrompt && groups.length > 0 && (
-          <div className="mt-4 p-4 bg-sage-light rounded-xl animate-slide-up">
-            <p className="text-sm font-semibold text-charcoal mb-2">📢 Share this win with your groups?</p>
-            <div className="flex flex-wrap gap-2">
-              {groups.map((g) => (
-                <button
-                  key={g.id}
-                  onClick={() => {
-                    onShareCompletion?.(habit.id, g.id);
-                    setShowSharePrompt(false);
-                  }}
-                  className="px-3 py-1 bg-white border border-sage text-sage text-sm rounded-full hover:bg-sage hover:text-white transition-all"
-                >
-                  {g.name}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Visibility */}
         {groups.length > 0 && (
