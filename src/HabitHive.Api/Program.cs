@@ -75,11 +75,20 @@ builder.Services.AddCors(options =>
 
 var app = builder.Build();
 
-// Ensure database is created
+// Apply any pending migrations (creates the DB on first run)
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<HabitHiveDbContext>();
-    db.Database.EnsureCreated();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    try
+    {
+        db.Database.Migrate();
+    }
+    catch (Exception ex)
+    {
+        logger.LogCritical(ex, "An error occurred while applying database migrations.");
+        throw;
+    }
 }
 
 // Serve static files (uploads, and production React build)

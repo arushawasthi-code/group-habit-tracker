@@ -36,8 +36,11 @@ npm run dev                           # http://localhost:5173
 npm run build
 npx tsc --noEmit                      # type-check only
 
-# No migrations — EF uses db.Database.EnsureCreated() at startup
-# To reset DB: delete src/HabitHive.Api/habithive.db
+# Migrations (run from src/HabitHive.Api/)
+dotnet ef migrations add <MigrationName>   # create a new migration
+dotnet ef migrations remove                # undo last migration (before it's applied)
+# DB is auto-migrated at startup via db.Database.Migrate() in Program.cs
+# To reset DB in dev: delete src/HabitHive.Api/habithive.db and restart
 ```
 
 ## Project Structure
@@ -115,7 +118,7 @@ private Guid GetUserId() => Guid.Parse(Context.User!.FindFirstValue(ClaimTypes.N
 ## Common Pitfalls
 
 - **Tailwind v4:** No `tailwind.config.ts` — theme is in `index.css` `@theme {}` block. Adding new colors goes there, not in a config file.
-- **No EF migrations:** Schema is created fresh via `EnsureCreated()`. Adding a new column requires deleting the DB file in dev.
+- **EF migrations:** Schema is applied via `db.Database.Migrate()` at startup. Adding a new column requires `dotnet ef migrations add <Name>` from `src/HabitHive.Api/`. In dev, delete `habithive.db` before restarting if you need a clean slate.
 - **SignalR group name = `groupId.ToString()`** (Guid string). Match exactly when broadcasting: `Clients.Group(groupId.ToString())`.
 - **Double-completion guard:** Unique index on `(HabitId, CompletedDate)` — API returns 409 on duplicate. Frontend should disable the button after success.
 - **Habit deletion cascade:** `DeleteHabitAsync` manually removes `HabitCompletions` and `HabitGroupVisibilities` before removing the habit (EF cascade not relied on for these).
