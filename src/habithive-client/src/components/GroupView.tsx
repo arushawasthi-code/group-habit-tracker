@@ -263,6 +263,16 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
           {/* GIF Picker */}
           {showGifPicker && (
             <div className="border-t border-border-warm bg-white p-3 animate-slide-up" style={{ height: '300px' }}>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-charcoal text-sm">Send a GIF</h3>
+                <button
+                  onClick={() => { setShowGifPicker(false); setGifQuery(''); setGifs([]); }}
+                  className="text-cocoa hover:text-charcoal text-sm"
+                  title="Close GIF picker"
+                >
+                  ✕
+                </button>
+              </div>
               <input
                 type="text"
                 value={gifQuery}
@@ -271,7 +281,7 @@ export default function GroupView({ group, onUpdate }: GroupViewProps) {
                 className="w-full px-3 py-2 rounded-xl border border-border-warm bg-cream text-sm focus:outline-none focus:ring-2 focus:ring-amber mb-2"
                 autoFocus
               />
-              <div className="overflow-y-auto grid grid-cols-3 gap-2" style={{ height: '230px' }}>
+              <div className="overflow-y-auto grid grid-cols-3 gap-2" style={{ height: '210px' }}>
                 {gifs.map((gif) => (
                   <img
                     key={gif.id}
