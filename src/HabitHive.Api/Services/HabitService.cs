@@ -290,10 +290,20 @@ public class HabitService
         await _db.SaveChangesAsync();
     }
 
-    public async Task<List<Guid>> GetSharedGroupIdsAsync(Guid habitId)
+    public async Task<List<Guid>> GetSharedGroupIdsAsync(Guid userId, Guid habitId)
     {
+        var habitExists = await _db.Habits
+            .AnyAsync(h => h.Id == habitId && h.UserId == userId);
+        if (!habitExists)
+            throw new KeyNotFoundException("Habit not found");
+
+        var userGroupIds = await _db.GroupMembers
+            .Where(gm => gm.UserId == userId && gm.LeftAt == null)
+            .Select(gm => gm.GroupId)
+            .ToListAsync();
+
         return await _db.HabitGroupVisibilities
-            .Where(v => v.HabitId == habitId)
+            .Where(v => v.HabitId == habitId && userGroupIds.Contains(v.GroupId))
             .Select(v => v.GroupId)
             .ToListAsync();
     }

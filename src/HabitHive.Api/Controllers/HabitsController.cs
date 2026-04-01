@@ -92,7 +92,7 @@ public class HabitsController : ControllerBase
             var result = await _habitService.CompleteHabitAsync(userId, id, request);
 
             // Auto-post completion message to all groups this habit is shared with
-            var groupIds = await _habitService.GetSharedGroupIdsAsync(id);
+            var groupIds = await _habitService.GetSharedGroupIdsAsync(userId, id);
             if (groupIds.Count > 0)
             {
                 var content = System.Text.Json.JsonSerializer.Serialize(new
