@@ -289,4 +289,12 @@ public class HabitService
 
         await _db.SaveChangesAsync();
     }
+
+    public async Task<List<Guid>> GetSharedGroupIdsAsync(Guid habitId)
+    {
+        return await _db.HabitGroupVisibilities
+            .Where(v => v.HabitId == habitId)
+            .Select(v => v.GroupId)
+            .ToListAsync();
+    }
 }
